@@ -1,0 +1,324 @@
+openapi: 3.0.3
+info:
+  title: Patchwork Archive API
+  description: |-
+    API data from Patchwork Archive is public and **no API key** is required to access what is publicly available on the frontend.
+
+  license:
+    name: MIT License
+    url: https://opensource.org/license/mit/
+  version: MIT
+servers:
+  - url: https://archive.pinapelz.moe/api
+tags:
+  - name: channel
+    description: Data regarding a specific channel
+  - name: video
+    description: Data regarding archived videos
+  - name: database
+    description: More detailed data regarding videos
+paths:
+  /channel/{channel_id}:
+    get:
+      tags:
+        - channel
+      summary: Gets archived videos from a particular channel
+      description: Gets a paginated result of archived videos matching a channel id
+      parameters:
+        - name: channel_id
+          in: path
+          description: YouTube Channel ID
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page of video to show (starts on page 1)
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+  /channel_name:
+    get:
+      tags:
+        - channel
+      summary: Gets archived videos from a particular channel
+      description: Gets a paginated result of archived videos matching a channel id
+      parameters:
+        - name: channel_id
+          in: query
+          description: YouTube Channel ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  channel_name:
+                    type: string
+                    example: Erina Ch. エリナ・マキナ 【Phase Connect】
+
+
+  /video/{video_id}:
+    get:
+      tags:
+        - video
+      summary: Get basic information regarding a specific video
+      description: Pulls basic information about a video from fallback database only
+      operationId: getBasicVideoInfo
+      parameters:
+        - name: video_id
+          in: path
+          description: YouTube Video ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  channel_id:
+                    type: string
+                    example: UCupmjRr7kPgzXKh-cPxxGbg
+                  channel_name:
+                    type: string
+                    example: Erina Ch. エリナ・マキナ 【Phase Connect】
+                  description:
+                    type: string
+                    example: The very long description portion
+                  title:
+                    type: string
+                    example: イート / jon-YAKITORY feat.Ado - eat / cover by erina makina
+                  upload_date:
+                    type: string
+                    example: 2022-07-11
+                  video_id:
+                    type: string
+                    example: bX8-8928lcM
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Video ID does not exist"
+
+  /random_video:
+    get:
+      tags:
+        - video
+      summary: Get a singular random video
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+
+  /discover_videos:
+    get:
+      tags:
+        - video
+      summary: Get multiple random videos
+      parameters:
+        - name: count
+          in: query
+          description: Number of random videos to get (default=1)
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+
+  /search/results:
+    get:
+      tags:
+        - video
+      summary: Get paginated search results for some keyword
+      parameters:
+        - name: q
+          in: query
+          description: Keywords to search for
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number for results (default=1)
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+
+  /daily_featured_videos:
+    get:
+      tags:
+        - video
+      summary: Get today's daily features videos
+      description: Either 1 or 2 video objects in an array depending on calculated hash
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+
+  /recently_archived:
+    get:
+      tags:
+        - video
+      summary: Get the 6 most recently archived videos
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+
+  /database/video_data/{video_id}:
+    get:
+      tags:
+        - database
+      summary: Get detailed information about the video if available
+      description: If info.json generated by yt-dlp is available it will be directly delivered here, if not, fallback video data from the database is used instead
+      parameters:
+        - name: video_id
+          in: path
+          description: YouTube Video ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+
+  /database/status:
+    get:
+      tags:
+        - database
+      summary: Get the status of the database
+      responses:
+        '200':
+          description: successful operation.
+          content:
+            application/json:
+              schema:
+                properties:
+                  OK:
+                    type: string
+                    example: "OK"
+        '500':
+          description: database is down
+          content:
+            application/json:
+              schema:
+                properties:
+                  FAIL:
+                    type: string
+                    example: "500"
+
+  /storage/status:
+    get:
+      tags:
+        - database
+      summary: Get the status of the database
+      description: Gets the number of videos archived and space used in GB
+      responses:
+        '200':
+          description: successful operation.
+          content:
+            application/json:
+              schema:
+                properties:
+                  number_of_files:
+                    type: integer
+                    example: 3823
+                  storage_size:
+                    type: integer
+                    example: 900
+
+
+components:
+  schemas:
+    Channel:
+      type: object
+      required:
+        - channel_name
+      properties:
+        channel_name:
+          type: string
+          example: Erina Ch. エリナ・マキナ 【Phase Connect】
+    Video:
+      type: object
+      required:
+        - channel_id
+        - channel_name
+        - description
+        - title
+        - upload_date
+        - video_id
+      properties:
+        channel_id:
+          type: string
+          example: UCupmjRr7kPgzXKh-cPxxGbg
+        channel_name:
+          type: string
+          example: Erina Ch. エリナ・マキナ 【Phase Connect】
+        description:
+          type: string
+          example: The very long description portion
+        title:
+          type: string
+          example: イート / jon-YAKITORY feat.Ado - eat / cover by erina makina
+        upload_date:
+          type: string
+          example: 2022-07-11
+        video_id:
+          type: string
+          example: bX8-8928lcM
