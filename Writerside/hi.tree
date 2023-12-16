@@ -5,6 +5,7 @@
 <instance-profile id="hi"
                  name="Project Knowledge Base"
                  start-page="Welcome.md">
+    <toc-element topic="IMissSomeone-VT.md"/>
     <toc-element topic="Welcome.md"/>
     <toc-element topic="Patchwork-Archive.md">
         <toc-element topic="Patchwork-API.md"/>
