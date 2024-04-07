@@ -1,5 +1,8 @@
+---
+title: IMissSomeone-VT Docs
+lang: en-US
+---
 # IMissSomeone-VT
-
 Miss your favorite VTuber? "I Miss Someone VT" is a template for deploying a fansite for any particular VTuber.
 
 This page serves as documentation for necessary configuration

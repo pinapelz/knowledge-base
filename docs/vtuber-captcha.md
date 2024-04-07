@@ -1,15 +1,18 @@
+---
+title: VTuber Captcha Docs
+---
 # VTuber Captcha
 
 A simple web API that serves VTuber related CAPTCHAs including server-side verification. 
 Bring your own frontend to display the data.
 
-# Available Endpoints
+## Available Endpoints
 The base URL or the API currently is: `https://vtuber-captcha.vercel.app/api`
 
 Below are the current API endpoints supported:
 [Authenticating Against the API](https://github.com/pinapelz/vtuber-captcha/wiki/Authenticating-Answers-Against-the-API)
 
-## `/affiliation/<org>`
+### `/affiliation/<org>`
 Returns a captcha asking user to identify which of the VTubers are affiliated with a particular organization or group
 
 **Path Parameters**
@@ -21,7 +24,7 @@ Returns a captcha asking user to identify which of the VTubers are affiliated wi
 
 
 
-# Authenticating Answers Against The Server
+## Authenticating Answers Against The Server
 The API supports server-side verification meaning that the answer to the CAPTCHA is never sent to you after making the initial request.
 
 Instead, each request will be assigned a session-token which uniquely identifies the CAPTCHA. The server then saves the answer to the CAPTCHA.
@@ -30,7 +33,7 @@ This makes it safe for you to directly call the API client-side from a frontend 
 To authenticate answers against the API. You need to specify the query parameter `?server_auth=true`
 
 **Example Response with `?server_auth=true`**
-```
+```json
 {
   "category": "affiliation",
   "onFail": {
@@ -132,7 +135,7 @@ session: "j4WjkoMcPgNX8_gnNXf8HA"
 answer: "UC0ZTVxCHkZanT5dnP2FZD4Q,UC4WvIIAo89_AzGUh1AZ6Dkg,UCe0JiGnjPfEwEIbWASbOimw"
 ```
 Response:
-```
+```json4
 {
     success: false
 }
@@ -146,7 +149,7 @@ and their answer was incorrect.
 
 After failing a captcha, the token becomes invalidated and a request for a new CAPTCHA must be made
 
-# Supported Keywords
-## Organization
+## Supported Keywords
+### Organization
 - Hololive: All hololive Production affiliated members, including Holostars
 - Nijisanji: All Nijisanji affiliated livers, including EN branches (does not include VirtuaReal)
