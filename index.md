@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Patchwork Archive API
-      link: /docs/patchwork-archive-api
+      link: /repos/patchwork-archive-api
 
 features:
   - title: Patchwork Archive API

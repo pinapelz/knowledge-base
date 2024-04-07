@@ -14,9 +14,9 @@ export default defineConfig({
       {
         text: 'Projects',
         items: [
-          { text: 'Patchwork Archive API', link: '/docs/patchwork-archive-api' },
-          { text: 'I Miss Someone VT', link: '/docs/i-miss-someone-vt' },
-          { text: 'VTuber Captcha', link: '/docs/vtuber-captcha' }
+          { text: 'Patchwork Archive API', link: '/repos/patchwork-archive-api' },
+          { text: 'I Miss Someone VT', link: '/repos/i-miss-someone-vt' },
+          { text: 'VTuber Captcha', link: '/repos/vtuber-captcha' }
         ]
       }
     ],
