@@ -7,8 +7,11 @@ hero:
   text: "Yet Another Bunch of Expertise (YABE)"
   actions:
     - theme: brand
-      text: Patchwork Archive API
-      link: /repos/patchwork-archive-api
+      text: Project Documentation
+      link: /repos/info
+    - theme: brand
+      text: Personal Tools
+      link: /personal/tools
 
 features:
   - title: Patchwork Archive API
