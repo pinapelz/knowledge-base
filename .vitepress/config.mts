@@ -22,7 +22,7 @@ export default defineConfig({
       {
         text: 'Personal',
         items: [
-          {text: 'Personal Tools', link: '/personal/tools.md'}
+          {text: 'Fun Tools', link: '/personal/tools.md'}
         ]
       }
     ],
