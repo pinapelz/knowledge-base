@@ -15,8 +15,14 @@ export default defineConfig({
         text: 'Projects',
         items: [
           { text: 'Patchwork Archive API', link: '/repos/patchwork-archive-api' },
-          { text: 'I Miss Someone VT', link: '/repos/i-miss-someone-vt' },
+          { text: 'I Miss Someone VT (Legacy)', link: '/repos/i-miss-someone-vt' },
           { text: 'VTuber Captcha', link: '/repos/vtuber-captcha' }
+        ]
+      },
+      {
+        text: 'Personal',
+        items: [
+          {text: 'Personal Tools', link: '/personal/tools.md'}
         ]
       }
     ],
