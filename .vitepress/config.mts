@@ -16,7 +16,8 @@ export default defineConfig({
         items: [
           { text: 'Patchwork Archive API', link: '/repos/patchwork-archive-api' },
           { text: 'I Miss Someone VT (Legacy)', link: '/repos/i-miss-someone-vt' },
-          { text: 'VTuber Captcha', link: '/repos/vtuber-captcha' }
+          { text: 'VTuber Captcha', link: '/repos/vtuber-captcha' },
+          { text: 'JHolodex', link: '/repos/jholodex' },
         ]
       },
       {
