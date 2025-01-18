@@ -23,7 +23,9 @@ export default defineConfig({
       {
         text: 'Personal',
         items: [
-          {text: 'Fun Tools', link: '/personal/tools.md'}
+          {text: 'Fun Tools', link: '/personal/tools.md'},
+          {text: 'arisu-ffxiv', link: '/personal/arisu.md'}
+
         ]
       }
     ],
