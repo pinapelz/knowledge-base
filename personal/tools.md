@@ -80,12 +80,6 @@ A self-hostable Discord bot for tracking VTubers listed on Holodex. Its very sim
 
 ![Screenshot of sample VStreamtracker bot message](https://files.catbox.moe/qzmlip.png)
 
-## audiolink-player
-`This is a stub for now. Coming soon!`
-
-## ragtag-remote-player
-`This is a stub for now. Coming soon!`
-
 ## [youtube-timed-playlist](https://github.com/pinapelz/youtube-timed-playlist) - archived
 > Javascript, React, Vite
 
